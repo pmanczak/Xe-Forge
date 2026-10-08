@@ -177,7 +177,7 @@ class XeForgePipeline:
             bedrock = self.config.llm.model.startswith("bedrock/")
             lm = dspy.LM(
                 model=self.config.llm.model,
-                api_base=self.config.llm.api_base,
+                api_base=None if bedrock else self.config.llm.api_base,
                 model_type="chat" if bedrock else "responses",
                 api_key=None if bedrock else (self.config.llm.api_key or ""),
                 temperature=self.config.llm.temperature,

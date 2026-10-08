@@ -38,7 +38,7 @@ def _setup_dspy(config: Config) -> None:
     bedrock = config.llm.model.startswith("bedrock/")
     lm = dspy.LM(
         model=config.llm.model,
-        api_base=config.llm.api_base,
+        api_base=None if bedrock else config.llm.api_base,
         model_type="chat" if bedrock else "responses",
         api_key=None if bedrock else (config.llm.api_key or ""),
         temperature=config.llm.temperature,
